@@ -23,6 +23,23 @@ class ListsTestCase(unittest.TestCase):
         yellow = colours.pop(1)
         self.assertEqual(yellow, 'yellow')
         self.assertEqual(colours, ['red', 'blue'])
+        colours.remove('red')
+        self.assertEqual(colours, ['blue'])
+
+        # remove only removes one thing
+        numbers = [1, 1, 1]
+        numbers.remove(1)
+        self.assertEqual(numbers, [1, 1])
+
+        numbers = [2, 1, 3]
+        numbers.sort()
+        self.assertEqual(numbers, [1, 2, 3])
+        numbers.sort(reverse=True)
+        self.assertEqual(numbers, [3, 2, 1])
+        other_numbers = sorted(numbers)
+        self.assertEqual(numbers, [3, 2, 1])
+        self.assertEqual(other_numbers, [1, 2, 3])
+        self.assertEqual(len(numbers), 3)
 
 
 if __name__ == '__main__':
