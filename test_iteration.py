@@ -1,50 +1,47 @@
-import unittest
+import pytest
 
 
-class MyTestCase(unittest.TestCase):
-    def test_iteration(self):
-        total = 0
-        for number in [1, 2, 3]:
-            total += number
-        self.assertEqual(6, total)
+def test_iteration():
+    total = 0
+    for number in [1, 2, 3]:
+        total += number
+    assert total == 6
 
-        total = 0
-        for number in range(1, 4):
-            total += number
-        self.assertEqual(6, total)
+    total = 0
+    for number in range(1, 4):
+        total += number
 
-        self.assertEqual([1, 2], list(range(1, 3)))
+    assert total == 6
+    assert list(range(1, 3)) == [1, 2]
 
-        # the 3rd argument adds 2 to each number, presumably it defaults to 1
-        self.assertEqual([2, 4, 6, 8, 10], list(range(2, 11, 2)))
+    # the 3rd argument adds 2 to each number, presumably it defaults to 1
+    assert list(range(2, 11, 2)) == [2, 4, 6, 8, 10]
 
-        numbers = list(range(0, 20))
-        self.assertEqual(19, max(numbers))
-        self.assertEqual(0, min(numbers))
-        self.assertEqual(190, sum(numbers))
-
-    def test_list_comprehension(self):
-        squares = [value**2 for value in range(1, 11)]
-        self.assertEqual([1, 4, 9, 16, 25, 36, 49, 64, 81, 100], squares)
-
-        # slices just like go, and you can use them in for too
-        self .assertEqual([4, 9, 16], squares[1:4])
-        squares_copy = squares[:]
-        squares_copy.pop()
-        self.assertEqual([1, 4, 9, 16, 25, 36, 49, 64, 81, 100], squares)
-        self.assertEqual([1, 4, 9, 16, 25, 36, 49, 64, 81], squares_copy)
-
-    def test_tuples(self):
-        # tuples are immutable lists
-        dimensions = (200, 50)
-        self.assertEqual(200, dimensions[0])
-        # dimensions[0] = 250 <- cant do this
-
-        # but you can override the variable
-        dimensions = (100, 50)
-        self.assertEqual(100, dimensions[0])
+    numbers = list(range(0, 20))
+    assert max(numbers) == 19
+    assert min(numbers) == 0
+    assert sum(numbers) == 190
 
 
+def test_list_comprehension():
+    squares = [value ** 2 for value in range(1, 11)]
+    assert squares == [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 
-if __name__ == '__main__':
-    unittest.main()
+    # slices just like go, and you can use them in for too
+    assert squares[1:4] == [4, 9, 16]
+    squares_copy = squares[:]
+    squares_copy.pop()
+    assert squares == [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+    assert squares_copy == [1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+
+def test_tuples():
+    # tuples are immutable lists
+    dimensions = (200, 50)
+    assert dimensions[0] == 200
+
+    with pytest.raises(Exception):
+        dimensions[0] = 250
+
+    dimensions = (100, 50)
+    assert dimensions[0] == 100

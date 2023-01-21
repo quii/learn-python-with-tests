@@ -1,9 +1,10 @@
-from unittest import TestCase
+import pytest
 
 from hello import Greeter
 
+@pytest.fixture
+def greeter():
+    return Greeter("Hello")
 
-class Test(TestCase):
-    def test_greet(self):
-        subject = Greeter("Hello")
-        self.assertEqual(subject.greet("world"), "Hello, world")
+def test_greet(greeter):
+    assert greeter.greet("world") == "Hello, world"

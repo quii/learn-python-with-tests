@@ -1,10 +1,7 @@
-from unittest import TestCase
-
 from booleans import is_even
 
 
-class Test(TestCase):
-    def test_is_even(self):
-        self.assertEqual(is_even(2), True)
-        self.assertEqual(is_even(3), False)
-        self.assertEqual(is_even(2) and is_even(4), True)
+def test_is_even():
+    assert is_even(2)
+    assert is_even(3) is False
+    assert is_even(2) and is_even(4)
