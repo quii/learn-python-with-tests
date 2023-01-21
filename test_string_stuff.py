@@ -1,10 +1,6 @@
-from unittest import TestCase
+def test_string_things():
+    assert "poo".upper() == "POO"
+    assert "BUM".lower() == "bum"
 
-
-class MyTestCase(TestCase):
-    def test_something(self):
-        self.assertEqual("poo".upper(), "POO")
-        self.assertEqual("BUM".lower(), "bum")
-
-        age = 38
-        self.assertEqual("you are " + str(age) + " years old", "you are 38 years old")
+    age = 38
+    assert "you are " + str(age) + " years old" == "you are 38 years old"
