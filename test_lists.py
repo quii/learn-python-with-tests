@@ -1,46 +1,40 @@
-import unittest
+def test_lists():
+    people = ['chris', 'ruth', 'pepper']
+    assert people[0].title() == "Chris"
+    assert people[-1] == "pepper"
 
+    # todo: this is begging to be a test fixture, learn how to do tha
+    people.append('tiago')
+    assert people[-1] == 'tiago'
+    del people[-1]
+    assert people[-1] == 'pepper'
 
-class ListsTestCase(unittest.TestCase):
-    def test_lists(self):
-        people = ['chris', 'ruth', 'pepper']
-        self.assertEqual(people[0].title(), "Chris")
-        self.assertEqual(people[-1], "pepper")
+    people.insert(0, 'dave')
+    assert people[0]=='dave'
 
-        people.append('tiago')
-        self.assertEqual(people[-1], 'tiago')
-        del people[-1]
-        self.assertEqual(people[-1], 'pepper')
+    last_person = people.pop()
+    assert last_person == 'pepper'
+    assert people[-1] == 'ruth'
 
-        people.insert(0, 'dave')
-        self.assertEqual(people[0], 'dave')
+    colours = ['red', 'yellow', 'blue']
+    yellow = colours.pop(1)
+    assert yellow == 'yellow'
+    assert colours == ['red', 'blue']
+    colours.remove('red')
+    assert colours == ['blue']
 
-        last_person = people.pop()
-        self.assertEqual(last_person, 'pepper')
-        self.assertEqual(people[-1], 'ruth')
+    # remove only removes one thing
+    numbers = [1, 1, 1]
+    numbers.remove(1)
+    assert numbers == [1, 1]
 
-        colours = ['red', 'yellow', 'blue']
-        yellow = colours.pop(1)
-        self.assertEqual(yellow, 'yellow')
-        self.assertEqual(colours, ['red', 'blue'])
-        colours.remove('red')
-        self.assertEqual(colours, ['blue'])
+    numbers = [2, 1, 3]
+    numbers.sort()
+    assert numbers == [1, 2, 3]
 
-        # remove only removes one thing
-        numbers = [1, 1, 1]
-        numbers.remove(1)
-        self.assertEqual(numbers, [1, 1])
-
-        numbers = [2, 1, 3]
-        numbers.sort()
-        self.assertEqual(numbers, [1, 2, 3])
-        numbers.sort(reverse=True)
-        self.assertEqual(numbers, [3, 2, 1])
-        other_numbers = sorted(numbers)
-        self.assertEqual(numbers, [3, 2, 1])
-        self.assertEqual(other_numbers, [1, 2, 3])
-        self.assertEqual(len(numbers), 3)
-
-
-if __name__ == '__main__':
-    unittest.main()
+    numbers.sort(reverse=True)
+    assert numbers == [3, 2, 1]
+    other_numbers = sorted(numbers)
+    assert numbers == [3, 2, 1]
+    assert other_numbers == [1, 2, 3]
+    assert len(numbers) == 3
