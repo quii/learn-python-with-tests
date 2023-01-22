@@ -60,6 +60,10 @@ def test_len(people):
     assert len(people) == 3
 
 
+def test_map(people):
+    assert list(map(lambda x: x.title(), people)) == ['Chris', 'Ruth', 'Pepper']
+
+
 def test_remove_multiple():
     numbers = [1, 1, 1]
     numbers.remove(1)
