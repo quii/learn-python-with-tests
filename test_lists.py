@@ -62,6 +62,7 @@ def test_len(people):
 
 def test_map(people):
     assert list(map(lambda x: x.title(), people)) == ['Chris', 'Ruth', 'Pepper']
+    assert [x.title() for x in people] == ['Chris', 'Ruth', 'Pepper']
 
 
 def test_remove_multiple():
